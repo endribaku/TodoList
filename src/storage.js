@@ -1,3 +1,5 @@
+import { Project } from './project.js';
+
 
 function saveProjectsToStorage(projectList) {
     localStorage.setItem("projectList", JSON.stringify(projectList));
@@ -9,20 +11,14 @@ function getSavedProjects() {
     try {
     const data = localStorage.getItem("projectList");
     if (data) {
-        savedProjects = JSON.parse(data);
+        const rawProjects = JSON.parse(data);
+        return rawProjects.map(Project.fromJSON);
     }
     } catch (error) {
     console.error("Error parsing projects from localStorage:", error);
-    savedProjects = [
-        {
-        id: "inbox",
-        name: "Inbox",
-        todos: []
-        }
-    ];
+    
+    return [new Project("inbox", "Inbox")];
     }
-
-    return savedProjects;
 }
 
 export {saveProjectsToStorage, getSavedProjects};
