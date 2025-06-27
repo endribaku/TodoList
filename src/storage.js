@@ -10,15 +10,21 @@ function getSavedProjects() {
 
     try {
     const data = localStorage.getItem("projectList");
-    if (data) {
+        if (!data) {
+            return [new Project("Inbox")];
+        }
+
         const rawProjects = JSON.parse(data);
-        return rawProjects.map(Project.fromJSON);
-    }
+        const hydrated = rawProjects.map(Project.fromJSON);
+
+        return hydrated.length > 0 ? hydrated : [new Project("Inbox")];
+
     } catch (error) {
-    console.error("Error parsing projects from localStorage:", error);
+        console.error("Error parsing projects from localStorage:", error);
+        return [new Project("Inbox")];
     }
 
-    return [new Project("Inbox")];
+    
 }
 
 export {saveProjectsToStorage, getSavedProjects};

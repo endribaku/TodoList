@@ -67,7 +67,7 @@ function getTodoFromProject(projectId, todoId) {
 function getProjectByID(projectId) {
     const project = projectList.find(project => project.id === projectId);
     if (!project) return null;
-    return project
+    return project;
 }
 
 
