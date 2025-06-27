@@ -34,12 +34,14 @@ function renderProjectList() {
             projectEntry.classList.add("active");
         }
 
+        projectEntry.addEventListener("click", function() {
+            activeProjectId = project.id;
+            renderActiveToDoList(activeProjectId);
+        })
         projectList.append(projectEntry);
     }
     sideBar.appendChild(projectList);
     appSelector.appendChild(sideBar);
-
-
 }
 
 
