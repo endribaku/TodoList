@@ -139,3 +139,26 @@ body {
 #todo-form button:hover {
   background-color: #218838;
 }
+
+
+.project-entry {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+}
+
+.delete-btn {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.project-entry:hover .delete-btn {
+  visibility: visible !important;
+  opacity: 1 !important;
+  color: red !important;
+}

@@ -1,9 +1,9 @@
 import { ToDoItem } from './todo.js';
 
 export class Project {
-    constructor(id, name) {
-        this.id = id;
+    constructor(name, id = crypto.randomUUID()) {
         this.name = name;
+        this.id = id;
         this.todoList = [];
     }
 
@@ -16,7 +16,7 @@ export class Project {
     }
 
     static fromJSON(raw) {
-        const project = new Project(raw.id, raw.name);
+        const project = new Project(raw.name, raw.id);
         if (Array.isArray(raw.todoList)) {
             raw.todoList.forEach(todoRaw => {
                 const todo = ToDoItem.fromJSON(todoRaw);

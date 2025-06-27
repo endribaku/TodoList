@@ -18,7 +18,7 @@ function getSavedProjects() {
     console.error("Error parsing projects from localStorage:", error);
     }
 
-    return [new Project("inbox", "Inbox")];
+    return [new Project("Inbox")];
 }
 
 export {saveProjectsToStorage, getSavedProjects};

@@ -64,8 +64,14 @@ function getTodoFromProject(projectId, todoId) {
     return project.todoList.find(todo => todo.id === todoId) || null;
 }
 
+function getProjectByID(projectId) {
+    const project = projectList.find(project => project.id === projectId);
+    if (!project) return null;
+    return project
+}
 
 
-export { addProject, removeProject, addTodoToProject, removeTodoFromProject, updateTodo, getTodoFromProject, getProjectList };
+
+export { addProject, removeProject, addTodoToProject, removeTodoFromProject, updateTodo, getTodoFromProject, getProjectList, getProjectByID };
 
 
