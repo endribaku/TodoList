@@ -155,9 +155,12 @@ function renderActiveToDoList(activeProjectId) {
         let deleteBtn = document.createElement("button");
         deleteBtn.textContent = "🗑️";
         deleteBtn.addEventListener("click", function() {
-            removeTodoFromProject(activeProjectId, todoItem.id);
-            renderProjectList();
-            renderActiveToDoList(activeProjectId);
+            if(confirm("Are you sure you want to delete Task?")) {
+                removeTodoFromProject(activeProjectId, todoItem.id);
+                renderProjectList();
+                renderActiveToDoList(activeProjectId);
+            }
+            
         })
 
         todoContainer.appendChild(todoTitle);
