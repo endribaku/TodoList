@@ -1,3 +1,5 @@
+import { ToDoItem } from './todo.js';
+
 export class Project {
     constructor(id, name) {
         this.id = id;

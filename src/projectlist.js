@@ -1,6 +1,8 @@
-import { ToDoItem } from './todo.js';
-import { Project } from './project.js';
+
 import {saveProjectsToStorage, getSavedProjects} from './storage.js';
+import { Project } from './project.js';
+import { ToDoItem } from './todo.js';
+
 
 let projectList = getSavedProjects();
 

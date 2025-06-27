@@ -1,0 +1,141 @@
+/* Reset and base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  min-height: 100vh;
+  display: flex;
+}
+
+#app {
+  display: flex;
+  width: 100%;
+}
+
+/* Sidebar */
+#sidebar {
+  width: 250px;
+  background-color: #ffffff;
+  padding: 1rem;
+  border-right: 1px solid #ddd;
+}
+
+#sidebar h2 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+}
+
+#project-list {
+  list-style: none;
+  margin-bottom: 1rem;
+}
+
+#project-list li {
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+#project-list li:hover {
+  background-color: #f0f0f0;
+}
+
+#project-form input {
+  width: 100%;
+  padding: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+#project-form button {
+  width: 100%;
+  padding: 0.4rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#project-form button:hover {
+  background-color: #0056b3;
+}
+
+/* Main */
+#main {
+  flex: 1;
+  padding: 1.5rem;
+}
+
+#current-project-name {
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  color: #222;
+}
+
+/* Todo List */
+#todo-list {
+  list-style: none;
+  margin-bottom: 2rem;
+}
+
+#todo-list li {
+  background-color: #fff;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#todo-list .todo-title {
+  font-weight: bold;
+}
+
+.todo-actions button {
+  margin-left: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.todo-actions .edit-btn {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.todo-actions .delete-btn {
+  background-color: #dc3545;
+  color: white;
+}
+
+/* Todo Form */
+#todo-form input,
+#todo-form select {
+  padding: 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+#todo-form button {
+  padding: 0.5rem;
+  width: 100%;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+#todo-form button:hover {
+  background-color: #218838;
+}
