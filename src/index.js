@@ -138,6 +138,13 @@ function renderActiveToDoList(activeProjectId) {
         let todoPriority = document.createElement("p");
         todoPriority.textContent = todoItem.priority;
 
+        let todoStatus = document.createElement("p");
+        if(todoItem.isComplete) {
+            todoStatus.textContent = "Completed";
+        } else {
+            todoStatus.textContent = "Not Completed";
+        }
+
         let changeStatusBtn = document.createElement("button");
         changeStatusBtn.textContent = "Change Status";
         changeStatusBtn.addEventListener("click", function() {
@@ -150,6 +157,48 @@ function renderActiveToDoList(activeProjectId) {
         //later
         let editBtn = document.createElement("button");
         editBtn.textContent = "Edit";
+        editBtn.addEventListener("click", function() {
+            if(document.querySelector("#edit-menu")) return;
+
+            let editMenu = document.createElement("div");
+            editMenu.id = "edit-menu";
+
+            let editForm = document.createElement("form");
+            
+            let editToDoTitle = document.createElement("input");
+            editToDoTitle.type = "text";
+            editToDoTitle.id = "edit-todo-title";
+            editToDoTitle.value = todoItem.title;
+
+            let editToDoDescription = document.createElement("input");
+            editToDoDescription.type = "text";
+            editToDoDescription.id = "edit-todo-description";
+            editToDoDescription.value = todoItem.description;
+
+            let editToDoDueDate = document.createElement("input");
+            editToDoDueDate.type = "text";
+            editToDoDueDate.id = "edit-todo-duedate";
+            editToDoDueDate.value = format(todoItem.dueDate, "yyyy-MM-dd");
+
+            let editToDoPriority = document.createElement("select");
+            editToDoPriority.id = "edit-todo-priority";
+
+            ["Low", "Medium", "High"].forEach((level) => {
+            const option = document.createElement("option");
+            option.value = level;
+            option.textContent = level;
+            option.selected = (todoItem.priority == level) ? true : false;
+            editToDoPriority.appendChild(option);
+            });
+
+            let cancelBtn = document.createElement("button");
+            cancelBtn.textContent = "Cancel Changes";
+            // later event listener
+
+            let editBtn = document.createElement("button");
+            editBtn.textContent = "Save Changes";
+            // later event listener
+        })
 
         //working now. 
         let deleteBtn = document.createElement("button");
@@ -167,6 +216,7 @@ function renderActiveToDoList(activeProjectId) {
         todoContainer.appendChild(todoDescription);
         todoContainer.appendChild(todoDueDate);
         todoContainer.appendChild(todoPriority);
+        todoContainer.appendChild(todoStatus);
         todoContainer.appendChild(changeStatusBtn);
         todoContainer.appendChild(editBtn);
         todoContainer.appendChild(deleteBtn);
