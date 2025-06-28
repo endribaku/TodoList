@@ -145,6 +145,8 @@ function renderActiveToDoList(activeProjectId) {
             todoStatus.textContent = "Not Completed";
         }
 
+        
+
         let changeStatusBtn = document.createElement("button");
         changeStatusBtn.textContent = "Change Status";
         changeStatusBtn.addEventListener("click", function() {
@@ -176,12 +178,20 @@ function renderActiveToDoList(activeProjectId) {
             editToDoDescription.value = todoItem.description;
 
             let editToDoDueDate = document.createElement("input");
-            editToDoDueDate.type = "text";
+            editToDoDueDate.type = "date";
             editToDoDueDate.id = "edit-todo-duedate";
             editToDoDueDate.value = format(todoItem.dueDate, "yyyy-MM-dd");
 
             let editToDoPriority = document.createElement("select");
             editToDoPriority.id = "edit-todo-priority";
+
+            let addToDoNote = document.createElement("input");
+            addToDoNote.type = "text";
+            addToDoNote.id = "add-todo-note";
+            addToDoNote.required = false;
+            if("note" in todoItem) {
+                addToDoNote.value = todoItem.note;
+            }
 
             ["Low", "Medium", "High"].forEach((level) => {
             const option = document.createElement("option");
@@ -194,16 +204,59 @@ function renderActiveToDoList(activeProjectId) {
             let cancelBtn = document.createElement("button");
             cancelBtn.textContent = "Cancel Changes";
             // later event listener
+            cancelBtn.addEventListener("click", function(event) {
+                event.preventDefault();
+                editMenu.remove();
+            })
 
-            let editBtn = document.createElement("button");
-            editBtn.textContent = "Save Changes";
+
+            let saveBtn = document.createElement("button");
+            saveBtn.textContent = "Save Changes";
             // later event listener
+            saveBtn.addEventListener("click", function(event) {
+                event.preventDefault();
+                let updatedTitle = editToDoTitle.value.trim();
+                let updatedDesc = editToDoDescription.value.trim();
+                let updatedDate = editToDoDueDate.value;
+                let updatedPriority = editToDoPriority.value;
+
+                
+
+                let updatedTodoItem = new ToDoItem(updatedTitle, updatedDesc, 
+                    updatedDate, updatedPriority);
+                updatedTodoItem.id = todoItem.id;
+                updatedTodoItem.isComplete = todoItem.isComplete;
+                
+                if(addToDoNote.value.trim().length > 0) {
+                    updatedTodoItem.note = addToDoNote.value;
+                }
+
+                updateTodo(activeProjectId, updatedTodoItem);
+                editMenu.remove();
+                renderProjectList();
+                renderActiveToDoList(activeProjectId);
+            })
+
+            editForm.appendChild(editToDoTitle);
+            editForm.appendChild(editToDoDescription);
+            editForm.appendChild(editToDoDueDate);
+            editForm.appendChild(editToDoPriority);
+            editForm.appendChild(addToDoNote);
+            editForm.appendChild(saveBtn);
+            editForm.appendChild(cancelBtn);
+
+            editMenu.appendChild(editForm);
+
+       
+            todoContainer.appendChild(editMenu);
+
         })
 
         //working now. 
         let deleteBtn = document.createElement("button");
         deleteBtn.textContent = "🗑️";
-        deleteBtn.addEventListener("click", function() {
+        deleteBtn.addEventListener("click", function(event) {
+            event.preventDefault();
             if(confirm("Are you sure you want to delete Task?")) {
                 removeTodoFromProject(activeProjectId, todoItem.id);
                 renderProjectList();
@@ -211,12 +264,18 @@ function renderActiveToDoList(activeProjectId) {
             }
             
         })
+        
 
         todoContainer.appendChild(todoTitle);
         todoContainer.appendChild(todoDescription);
         todoContainer.appendChild(todoDueDate);
         todoContainer.appendChild(todoPriority);
         todoContainer.appendChild(todoStatus);
+        if('note' in todoItem) {
+            let todoNote = document.createElement("p");
+            todoNote.textContent = todoItem.note;
+            todoContainer.appendChild(todoNote);
+        }
         todoContainer.appendChild(changeStatusBtn);
         todoContainer.appendChild(editBtn);
         todoContainer.appendChild(deleteBtn);
@@ -260,7 +319,8 @@ function renderActiveToDoList(activeProjectId) {
     submitBtn.type = "submit";
     submitBtn.textContent = "Add Todo";
     
-    form.addEventListener("submit", function() {
+    form.addEventListener("submit", function(event) {
+        event.preventDefault();
         let title = document.querySelector("#todo-title").value.trim();
         let desc = document.querySelector("#todo-description").value.trim();
         let date = new Date(document.querySelector("#todo-due-date").value);

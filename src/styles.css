@@ -221,3 +221,20 @@ body {
   color: white;
 }
 
+#edit-menu {
+    margin-top: 0.5rem;
+    background-color: #f9f9f9;
+    padding: 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+#edit-menu form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+#edit-menu input,
+#edit-menu select {
+    padding: 0.4rem;
+    font-size: 1rem;
+}
