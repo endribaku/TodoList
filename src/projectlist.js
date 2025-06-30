@@ -73,5 +73,3 @@ function getProjectByID(projectId) {
 
 
 export { addProject, removeProject, addTodoToProject, removeTodoFromProject, updateTodo, getTodoFromProject, getProjectList, getProjectByID };
-
-

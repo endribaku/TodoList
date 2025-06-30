@@ -338,9 +338,3 @@ function renderActiveToDoList(activeProjectId) {
 
     main.appendChild(form);
 }
-
-
-
-
-
-
